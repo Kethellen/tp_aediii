@@ -74,7 +74,7 @@ public class LivroController {
 
     private void incluirLivro() {
         System.out.println("\nInclusão de livro");
-        System.out.print("\nISBN");
+        System.out.print("\nISBN:");
         String isbn = console.nextLine();
         System.out.print("Titulo: ");
         String titulo = console.nextLine();
@@ -128,15 +128,15 @@ public class LivroController {
 
             System.out.print("Nova edição: ");
             String edicao = console.nextLine();
-            if (!edicao.isEmpty()) Livro.setGenero(edicao);
+            if (!edicao.isEmpty()) Livro.setEdicao(edicao);
 
             System.out.print("Novo prefixo: ");
             String prefixo = console.nextLine();
-            if (!prefixo.isEmpty()) Livro.setGenero(prefixo);
+            if (!prefixo.isEmpty()) Livro.setPrefixo(prefixo);
 
             System.out.print("Novo país origem: ");
             String paisOrigem = console.nextLine();
-            if (!paisOrigem.isEmpty()) Livro.setGenero(paisOrigem);
+            if (!paisOrigem.isEmpty()) Livro.setPaisOrigem(paisOrigem);
 
             System.out.print("Nova data de publicação (DD/MM/AAAA, vazio para manter): ");
             String dataStr = console.nextLine();
