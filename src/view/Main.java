@@ -1,6 +1,7 @@
 package view;
 
 import controller.AutorController;
+import controller.EditoraController;
 import java.util.Scanner;
 
 public class Main {
@@ -14,6 +15,7 @@ public class Main {
                 System.out.println("-------");
                 System.out.println("> Início");
                 System.out.println("\n1 - Autor");
+                System.out.println("2 - Editora");
                 System.out.println("0 - Sair");
 
                 System.out.print("\nOpção: ");
@@ -27,6 +29,10 @@ public class Main {
                     case 1:
                         AutorController autorController = new AutorController();
                         autorController.menu();
+                        break;
+                    case 2:
+                        EditoraController editoraController = new EditoraController();
+                        editoraController.menu();
                         break;
                     case 0:
                         System.out.println("Saindo...");
