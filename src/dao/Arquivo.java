@@ -52,10 +52,34 @@ public class Arquivo<T extends Registro> {
         return obj.getId();
     }
 
+    public long createEndereco(T obj) throws Exception {
+        arquivo.seek(0);
+        int novoID = arquivo.readInt() + 1;
+        arquivo.seek(0);
+        arquivo.writeInt(novoID);
+        obj.setId(novoID);
+        byte[] dados = obj.toByteArray();
+
+        long endereco = getDeleted(dados.length);
+        if (endereco == -1) {
+            arquivo.seek(arquivo.length());
+            endereco = arquivo.getFilePointer();
+            arquivo.writeByte(' ');  // Lápide
+            arquivo.writeShort(dados.length);
+            arquivo.write(dados);
+        } else {
+            arquivo.seek(endereco);
+            arquivo.writeByte(' ');  // Remove a lápide
+            arquivo.skipBytes(2);
+            arquivo.write(dados);
+        }
+        return endereco;
+    }
+
     public T read(int id) throws Exception {
         arquivo.seek(TAM_CABECALHO);
         while (arquivo.getFilePointer() < arquivo.length()) {
-            long posicao = arquivo.getFilePointer();
+            //long posicao = arquivo.getFilePointer();
             byte lapide = arquivo.readByte();
             short tamanho = arquivo.readShort();
             byte[] dados = new byte[tamanho];
@@ -69,6 +93,23 @@ public class Arquivo<T extends Registro> {
                 }
             }
         }
+        return null;
+    }
+
+    public T readByEndereco(long end) throws Exception {
+        arquivo.seek(end);
+
+        byte lapide = arquivo.readByte();
+        short tamanho = arquivo.readShort();
+        byte[] dados = new byte[tamanho];
+        arquivo.read(dados);
+
+        if (lapide == ' ') {
+                T obj = construtor.newInstance();
+                obj.fromByteArray(dados);
+                return obj;
+            }
+
         return null;
     }
 

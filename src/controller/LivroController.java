@@ -25,6 +25,7 @@ public class LivroController {
             System.out.println("2 - Incluir");
             System.out.println("3 - Alterar");
             System.out.println("4 - Excluir");
+            System.out.println("5 - Buscar por ID_Editora");
             System.out.println("0 - Voltar");
 
             System.out.print("\nOpção: ");
@@ -46,6 +47,9 @@ public class LivroController {
                     break;
                 case 4:
                     excluirLivro();
+                    break;
+                case 5:
+                    buscaLivrosPorEditora();
                     break;
                 case 0:
                     break;
@@ -89,9 +93,11 @@ public class LivroController {
         System.out.print("Data de publicacao (DD/MM/AAAA): ");
         String dataStr = console.nextLine();
         LocalDate dataPublicacao = LocalDate.parse(dataStr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        System.out.print("Id Editora: ");
+        int editoraId = console.nextInt();
 
         try {
-            Livro Livro = new Livro(isbn, titulo, genero, edicao, prefixo, paisOrigem, dataPublicacao);
+            Livro Livro = new Livro(isbn, titulo, genero, edicao, prefixo, paisOrigem, dataPublicacao, editoraId);
             if (LivroDAO.incluirLivro(Livro)) {
                 System.out.println("Livro incluído com sucesso.");
             } else {
@@ -175,6 +181,24 @@ public class LivroController {
             }
         } catch (Exception e) {
             System.out.println("Erro ao excluir Livro.");
+        }
+    }
+
+    private void buscaLivrosPorEditora() {
+        System.out.print("\nID da Editora: ");
+        int id = console.nextInt();
+        console.nextLine();
+        try {
+            Livro[] livros = LivroDAO.buscaLivrosPorEditora(id);
+            if (livros.length != 0) {
+                for(int i = 0; i<livros.length; i++){
+                    System.out.println(livros[i]);
+                }
+            } else {
+                System.out.println("Nenhum livro encontrado para a editora.");
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao buscar livros.");
         }
     }
 }

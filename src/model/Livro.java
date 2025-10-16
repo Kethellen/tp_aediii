@@ -14,16 +14,17 @@ public class Livro implements Registro {
     private String prefixo;
     private String paisOrigem;
     private LocalDate dataPublicacao;
+    private int idEditora;
 
     public Livro(){
-        this(-1,null,null,null,null,null,null,LocalDate.now());
+        this(-1,null,null,null,null,null,null,LocalDate.now(),-1);
     }
 
-    public Livro(String isbn, String titulo, String genero, String edicao, String prefixo, String paisOrigem, LocalDate dataPublicacao){
-        this(-1, isbn, titulo, genero, prefixo, edicao, paisOrigem, dataPublicacao);
+    public Livro(String isbn, String titulo, String genero, String edicao, String prefixo, String paisOrigem, LocalDate dataPublicacao, int idEditora){
+        this(-1, isbn, titulo, genero, prefixo, edicao, paisOrigem, dataPublicacao, idEditora);
     }
 
-    public Livro(int id, String isbn, String titulo, String genero, String edicao, String prefixo, String paisOrigem, LocalDate dataPublicacao) {
+    public Livro(int id, String isbn, String titulo, String genero, String edicao, String prefixo, String paisOrigem, LocalDate dataPublicacao, int idEditora) {
         this.id = id;
         this.isbn = isbn;
         this.titulo = titulo;
@@ -32,6 +33,7 @@ public class Livro implements Registro {
         this.prefixo = prefixo;
         this.paisOrigem = paisOrigem;
         this.dataPublicacao = dataPublicacao;
+        this.idEditora = idEditora;
     }
 
     // Getters e Setters
@@ -43,6 +45,7 @@ public class Livro implements Registro {
     public String getPrefixo() { return prefixo; }
     public String getPaisOrigem() { return paisOrigem; }
     public LocalDate getDataPublicacao() { return dataPublicacao; }
+    public int getIdEditora() { return idEditora; }
 
     public void setId(int id) { this.id = id; }
     public void setIsbn(String isbn) { this.isbn = isbn; }
@@ -52,6 +55,7 @@ public class Livro implements Registro {
     public void setPrefixo(String prefixo) { this.prefixo = prefixo; }
     public void setPaisOrigem(String paisOrigem) { this.paisOrigem = paisOrigem; }
     public void setDataPublicacao(LocalDate dataPublicacao) { this.dataPublicacao = dataPublicacao; }
+    public void setIdEditora(int idEditora) { this.idEditora = idEditora; }
 
     // Implementação do método toByteArray()
     public byte[] toByteArray() throws IOException {
@@ -65,6 +69,7 @@ public class Livro implements Registro {
         dos.writeUTF(this.prefixo);
         dos.writeUTF(this.paisOrigem);
         dos.writeLong(this.dataPublicacao.toEpochDay());
+        dos.writeInt(this.idEditora);
         return baos.toByteArray();
     }
 
@@ -80,6 +85,7 @@ public class Livro implements Registro {
         this.prefixo = dis.readUTF();
         this.paisOrigem = dis.readUTF();
         this.dataPublicacao = LocalDate.ofEpochDay(dis.readLong());
+        this.idEditora = dis.readInt();
     }
 
 
@@ -88,6 +94,6 @@ public class Livro implements Registro {
         return "Livro [id=" + id + ", ISBN=" + isbn + ", titulo=" + titulo 
                 + ", genero=" + genero + ", edicao=" + edicao + ", prefixo=" 
                 + prefixo + ", paisOrigem=" + paisOrigem + ", dataPublicacao=" 
-                + dataPublicacao + "]";
+                + dataPublicacao + ", idEditora=" + idEditora + "]";
     }
 }
