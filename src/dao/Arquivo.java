@@ -41,6 +41,7 @@ public class Arquivo<T extends Registro> {
             arquivo.seek(arquivo.length());
             endereco = arquivo.getFilePointer();
             arquivo.writeByte(' ');  // Lápide
+            System.out.println(dados.length);
             arquivo.writeShort(dados.length);
             arquivo.write(dados);
         } else {

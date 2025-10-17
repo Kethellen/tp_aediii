@@ -3,6 +3,9 @@ package view;
 import controller.AutorController;
 import controller.EditoraController;
 import controller.LivroController;
+import controller.UsuarioController;
+import controller.FavoritoController;
+
 import java.util.Scanner;
 
 public class Main {
@@ -18,6 +21,8 @@ public class Main {
                 System.out.println("\n1 - Autor");
                 System.out.println("2 - Editora");
                 System.out.println("3 - Livro");
+                System.out.println("4 - Usuario");
+                System.out.println("5 - Favorito");
                 System.out.println("0 - Sair");
 
                 System.out.print("\nOpção: ");
@@ -40,6 +45,12 @@ public class Main {
                         LivroController livroController = new LivroController();
                         livroController.menu();
                         break;
+                    case 4:
+                        UsuarioController usuarioController = new UsuarioController();
+                        usuarioController.menu();  
+                    case 5:
+                        FavoritoController favoritoControle = new FavoritoController();
+                        favoritoControle.menu();      
                     case 0:
                         System.out.println("Saindo...");
                         break;

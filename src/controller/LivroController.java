@@ -97,8 +97,13 @@ public class LivroController {
         int editoraId = console.nextInt();
 
         try {
+<<<<<<< HEAD
             Livro Livro = new Livro(isbn, titulo, genero, edicao, prefixo, paisOrigem, dataPublicacao, editoraId);
             if (LivroDAO.incluirLivro(Livro)) {
+=======
+            Livro Livro = new Livro(isbn, titulo, genero, edicao, prefixo, paisOrigem, dataPublicacao);
+            if (LivroDAO.incluirLivro(Livro) > 0) {
+>>>>>>> d48f57f (alteração)
                 System.out.println("Livro incluído com sucesso.");
             } else {
                 System.out.println("Erro ao incluir livro.");
