@@ -20,7 +20,7 @@ public class UsuarioController {
         do {
             System.out.println("\n\nAEDsIII");
             System.out.println("-------");
-            System.out.println("> Início > Autores");
+            System.out.println("> Início > Usuário");
             System.out.println("\n1 - Buscar");
             System.out.println("2 - Incluir");
             System.out.println("3 - Alterar");
