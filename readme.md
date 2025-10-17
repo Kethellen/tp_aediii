@@ -49,12 +49,21 @@ Arquitetura Proposta do Sistema.
 
 ### 🧱 3. Estrutura do Projeto
 
-src/
-├── model/              #Entidades principais (Livro, Autor, Editora, Usuario)
- ├── controller/        # Regras de negócio e controle de CRUD
- ├── index/             # Estruturas de índice (B+ Tree e Hash Extensível)
- ├── data/              # Arquivos binários de dados e índices
- └── view/              # Interface de interação com o usuário (console)
+ 📂 src/
+ 
+ ┣ 📂 controller/ Regras de negócio e controle de CRUD
+ 
+ ┣ 📂 dao/ Classes de acesso a dados
+ 
+ ┣ 📂 indices/ Estruturas de indices
+ 
+ ┣ 📂 model/ Entidades principais
+ 
+ ┣ 📂 view/ Classe principal e interface de interação com o usuário
+ 
+  📂 dados/ Arquivos binários de data
+  
+ ┗ 📜 README.md
 
 
 ---
