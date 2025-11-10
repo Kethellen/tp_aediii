@@ -1,17 +1,23 @@
 package controller;
 
 import dao.AutorDAO;
+import dao.LivroAutorDAO;
 import model.Autor;
+import model.Livro;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AutorController {
     private AutorDAO autorDAO;
+    private LivroAutorDAO livroAutorDAO;
     private Scanner console = new Scanner(System.in);
 
     public AutorController() throws Exception {
         autorDAO = new AutorDAO();
+        livroAutorDAO = new LivroAutorDAO();
     }
 
 
@@ -25,6 +31,8 @@ public class AutorController {
             System.out.println("2 - Incluir");
             System.out.println("3 - Alterar");
             System.out.println("4 - Excluir");
+            System.out.println("5 - Associar a Livro");
+            System.out.println("6 - Listar Livros do Autor");
             System.out.println("0 - Voltar");
 
             System.out.print("\nOpção: ");
@@ -46,6 +54,12 @@ public class AutorController {
                     break;
                 case 4:
                     excluirAutor();
+                    break;
+                case 5:
+                    associarAutorLivro();
+                    break;
+                case 6:
+                    listarLivrosDoAutor();
                     break;
                 case 0:
                     break;
@@ -154,4 +168,40 @@ public class AutorController {
             System.out.println("Erro ao excluir autor.");
         }
     }
+
+    private void associarAutorLivro() {
+        System.out.println("\nASSOCIAR AUTOR A LIVRO");
+        try {
+            System.out.print("ID do Autor: ");
+            int idAutor = Integer.valueOf(console.nextLine());
+            System.out.print("ID do Livro: ");
+            int idLivro = Integer.valueOf(console.nextLine());
+            
+            if (livroAutorDAO.associarLivroAutor(idLivro, idAutor)) {
+                System.out.println("Autor associado ao livro com sucesso!");
+            } else {
+                System.out.println("Erro ao associar autor ao livro.");
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao associar autor e livro: " + e.getMessage());
+        }
+    }
+
+    private void listarLivrosDoAutor() {
+    System.out.print("\nID do Autor: ");
+    int idAutor = Integer.valueOf(console.nextLine());
+    try {
+        ArrayList<Livro> livros = livroAutorDAO.buscarLivrosDoAutorCompleto(idAutor);
+        if (!livros.isEmpty()) {
+            for(int i = 0; i < livros.size(); i++){
+                System.out.println(livros.get(i)); // Mostra todos os atributos do livro
+            }
+        } else {
+            System.out.println("Nenhum livro encontrado para este autor.");
+        }
+    } catch (Exception e) {
+        System.out.println("Erro ao buscar livros do autor: " + e.getMessage());
+    }
 }
+}
+
