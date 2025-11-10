@@ -83,7 +83,7 @@ Espaços de registros excluídos podem ser reutilizados conforme o tamanho do no
 O relacionamento 1:N entre Livro e Editora é gerenciado por:
 
 Hash Extensível – acesso direto otimizado.
-
+Livro ↔ Autor (N:N) - Árvore B+
 
 ---
 
@@ -115,6 +115,9 @@ java -cp bin view.Main
 
 > 💡 Caso esteja usando o Visual Studio Code ou Eclipse, basta executar a classe Main do pacote view.
 
+### Comílação manual:
+javac -d bin src/controller/*.java src/dao/*.java src/model/*.java src/view/*.java src/indices/*.java
+java -cp bin view.Main
 
 ---
 
@@ -128,11 +131,33 @@ data/autores.dat	Registros de autores	Inclui data e nacionalidade
 data/editoras.dat	Registros de editoras	Chave primária usada em relacionamentos
 data/editora_livros_bpt.idx	Índice B+ Tree	Mapeia editora → livros
 data/editora_livros_hash.idx	Índice Hash Extensível	Mapeia editora → livros
+dados/relacionamentos/arvore_livro_autor.db	Árvore B+	Relacionamento N:N Livro-Autor
 
 
 ---
 
-## 🧾 8. Documentação Técnica
+## 🎮 8. Como Usar o Sistema
+Execute o programa
+
+Menu principal oferece:
+
+1 - Autor (CRUD + relacionamentos)
+
+2 - Editora (CRUD)
+
+3 - Livro (CRUD + relacionamentos)
+
+4 - Usuario (CRUD)
+
+5 - Favorito (CRUD)
+
+Relacionamentos disponíveis:
+
+No menu Livro: Associar a Autor, Listar Autores do Livro
+
+No menu Autor: Associar a Livro, Listar Livros do Autor
+
+## 🧾 9. Documentação Técnica
 
 O projeto será acompanhado pelos seguintes documentos:
 
