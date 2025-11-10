@@ -79,15 +79,15 @@ public class AutorController {
             if (autor != null) {
                 System.out.println(autor);
             } else {
-                System.out.println("Cliente não encontrado.");
+                System.out.println("Autor não encontrado.");
             }
         } catch (Exception e) {
-            System.out.println("Erro ao buscar cliente.");
+            System.out.println("Erro ao buscar autor.");
         }
     }
 
     private void incluirAutor() {
-        System.out.println("\nInclusão de cliente");
+        System.out.println("\nInclusão de autor");
 
         System.out.print("\nNome: ");
         String nome = console.nextLine();
@@ -100,7 +100,7 @@ public class AutorController {
         try {
             Autor autor = new Autor(nome, nacionalidade, nascimento);
             if (autorDAO.incluirAutor(autor)) {
-                System.out.println("Cliente incluído com sucesso.");
+                System.out.println("Autor incluído com sucesso.");
             } else {
                 System.out.println("Erro ao incluir cliente.");
             }
