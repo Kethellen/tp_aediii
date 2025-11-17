@@ -88,4 +88,17 @@ public class LivroDAO {
 
         return true;
     }
+
+    /** 
+     * Lista todos os livros armazenados no arquivo 
+     */
+    public ArrayList<Livro> listarTodos() throws Exception {
+        ArrayList<Livro> lista = new ArrayList<>();
+        int ultimoId = arqLivro.obterUltimoId();
+        for (int i = 1; i <= ultimoId; i++) {
+            Livro l = arqLivro.read(i);
+            if (l != null) lista.add(l);
+        }
+        return lista;
+    }
 }

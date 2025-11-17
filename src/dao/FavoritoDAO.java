@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.ArrayList;
+
 import model.Favorito;
 
 public class FavoritoDAO {
@@ -11,6 +13,9 @@ public class FavoritoDAO {
 
     public Favorito buscarFavorito(int id) throws Exception {
         return arqFavorito.read(id);
+    }
+    public ArrayList<Favorito> listarPorUsuario(int idUser) throws Exception {
+        return arqFavorito.scan(f -> ((Favorito) f).getIdUser() == idUser);
     }
 
     public int incluirFavorito(Favorito favorito) throws Exception {

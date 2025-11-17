@@ -2,8 +2,6 @@ package dao;
 
 import indices.ParLivroAutor;
 import indices.ArvoreBMais;
-import dao.AutorDAO;
-import dao.LivroDAO;
 import model.Autor;
 import model.Livro;
 import java.util.ArrayList;

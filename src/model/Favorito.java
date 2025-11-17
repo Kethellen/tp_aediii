@@ -9,13 +9,14 @@ public class Favorito implements Registro {
     private int idUser;
     private String isbn;
     private String nome;
+    private String modo;
 
     public Favorito(){
-        this(null, -1, null);
+        this(-1, -1, null, null);
     }
 
     public Favorito(String nome, int idUser, String isbn){
-        this(-1, 1, isbn, nome);
+        this(-1, idUser, isbn, nome);
     }
 
     public Favorito(int id, int idUser, String isbn, String nome) {

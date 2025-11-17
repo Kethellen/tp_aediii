@@ -3,6 +3,10 @@ package dao;
 import java.io.File;
 import java.io.RandomAccessFile;
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+import model.Usuario;
 
 public class Arquivo<T extends Registro> {
     private static final int TAM_CABECALHO = 12;
@@ -95,6 +99,54 @@ public class Arquivo<T extends Registro> {
             }
         }
         return null;
+    }
+
+    public ArrayList<T> scan(Predicate<T> filtro) throws Exception {
+        ArrayList<T> resultados = new ArrayList<>();
+
+        arquivo.seek(TAM_CABECALHO);
+        while (arquivo.getFilePointer() < arquivo.length()) {
+            byte lapide = arquivo.readByte();
+            short tamanho = arquivo.readShort();
+            byte[] dados = new byte[tamanho];
+            arquivo.readFully(dados);
+
+            if (lapide == ' ') {
+                T obj = construtor.newInstance();
+                obj.fromByteArray(dados);
+                if (filtro == null || filtro.test(obj)) {
+                    resultados.add(obj);
+                }
+            }
+        }
+
+        return resultados;
+    }
+    /*
+     * Buscar Usuario no banco por email e senha
+     */
+    public Usuario buscarUsuario(String email, String senha) throws Exception {
+        Usuario usuarioEncontrado = null;
+        arquivo.seek(TAM_CABECALHO); 
+
+        while (arquivo.getFilePointer() < arquivo.length()) {
+            byte lapide = arquivo.readByte();
+            short tam = arquivo.readShort();
+            byte[] dados = new byte[tam];
+            arquivo.readFully(dados);
+
+            if (lapide == ' ') {
+                Usuario u = new Usuario();
+                u.fromByteArray(dados);
+
+                if (u.getEmail().equals(email) && u.getSenha().equals(senha)) {
+                    usuarioEncontrado = u;
+                    break; 
+                }
+            }
+        }
+      
+        return usuarioEncontrado; 
     }
 
     public T readByEndereco(long end) throws Exception {
@@ -249,6 +301,19 @@ public class Arquivo<T extends Registro> {
         }
         return -1;
     }
+
+    /*
+     * Obter o Ultimo ID inserido
+     */
+    public int obterUltimoId() throws Exception {
+        long pos = arquivo.getFilePointer(); 
+        arquivo.seek(0);                     
+        int ultimo = arquivo.readInt();      
+        arquivo.seek(pos);                  
+        return ultimo;
+    }
+
+
 
     public void close() throws Exception {
         arquivo.close();
