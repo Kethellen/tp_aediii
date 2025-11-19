@@ -2,6 +2,7 @@ package controller;
 
 import dao.AutorDAO;
 import dao.LivroAutorDAO;
+import dao.LivroDAO;
 import model.Autor;
 import model.Livro;
 
@@ -71,18 +72,43 @@ public class AutorController {
     }
 
     private void buscarAutor() {
-        System.out.print("\nID do autor: ");
-        int id = console.nextInt();
-        console.nextLine();
+        System.out.println("\nCriterio da busca: \n");
+        System.out.println("1 - ID");
+        System.out.println("2 - Nome\n");
+
         try {
-            Autor autor = autorDAO.buscarAutor(id);
-            if (autor != null) {
-                System.out.println(autor);
+
+        int op = console.nextInt();
+
+        if(op==1){
+            System.out.print("\nID do Autor: ");
+            int id = console.nextInt();
+            console.nextLine();
+
+            Autor Autor = autorDAO.buscarAutor(id);
+            if (Autor != null) {
+                System.out.println("\n" + Autor);
             } else {
-                System.out.println("Autor não encontrado.");
+                System.out.println("\nAutor não encontrado.");
             }
+
+        } else if(op==2){
+            System.out.println("\nNome do Autor: ");
+            console.nextLine();
+            String nome = console.nextLine();
+
+                Autor Autor = autorDAO.buscarAutorPorNome(nome);
+                if (Autor != null) {
+                    System.out.println("\n" + Autor);
+                } else {
+                    System.out.println("\nAutor não encontrado.");
+                }
+        } else {
+                System.out.println("\nOpção inválida!");
+        }
+
         } catch (Exception e) {
-            System.out.println("Erro ao buscar autor.");
+            System.out.println("Erro ao buscar Autor.");
         }
     }
 

@@ -19,6 +19,10 @@ public class UsuarioDAO {
         return arqUser.read(id);
     }
 
+    public Usuario buscarUsuarioNick(String nick) throws Exception {
+        return arqUser.buscarUsuarioNick(nick);
+    }
+
     public int incluirUser(Usuario user) throws Exception {
         return arqUser.create(user);
     }

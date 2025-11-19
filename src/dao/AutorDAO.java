@@ -13,6 +13,10 @@ public class AutorDAO {
         return arqAutor.read(id);
     }
 
+    public Autor buscarAutorPorNome(String nome) throws Exception {
+        return arqAutor.buscarAutorPorNome(nome);
+    }
+
     public boolean incluirAutor(Autor autor) throws Exception {
         return arqAutor.create(autor) > 0;
     }

@@ -13,6 +13,10 @@ public class EditoraDAO {
         return arqEditora.read(id);
     }
 
+    public Editora buscardEditoraNome(String nome) throws Exception {
+        return arqEditora.buscardEditoraNome(nome);
+    }
+
     public boolean incluirEditora(Editora Editora) throws Exception {
         return arqEditora.create(Editora) > 0;
     }

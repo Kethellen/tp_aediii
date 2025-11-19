@@ -2,6 +2,7 @@ package controller;
 
 import dao.EditoraDAO;
 import model.Editora;
+import model.Editora;
 import java.util.Scanner;
 
 public class EditoraController {
@@ -55,19 +56,44 @@ public class EditoraController {
     }
 
     private void buscarEditora() {
-        System.out.print("\nID do Editora: ");
-        int id = console.nextInt();
-        console.nextLine();
+        System.out.println("\nCriterio da busca: \n");
+        System.out.println("1 - ID");
+        System.out.println("2 - Nome\n");
+
         try {
+
+        int op = console.nextInt();
+
+        if(op==1){
+            System.out.print("\nID da Editora: ");
+            int id = console.nextInt();
+            console.nextLine();
+
             Editora Editora = EditoraDAO.buscarEditora(id);
             if (Editora != null) {
-                System.out.println(Editora);
+                System.out.println("\n" + Editora);
             } else {
-                System.out.println("Editora não encontrado.");
+                System.out.println("\nEditora não encontrada.");
             }
-        } catch (Exception e) {
-            System.out.println("Erro ao buscar editora.");
+
+        } else if(op==2){
+            System.out.println("\nNome da Editora: ");
+            console.nextLine();
+            String nome = console.nextLine();
+
+                Editora Editora = EditoraDAO.buscardEditoraNome(nome);
+                if (Editora != null) {
+                    System.out.println("\n" + Editora);
+                } else {
+                    System.out.println("\nEditora não encontrada.");
+                }
+        } else {
+                System.out.println("\nOpção inválida!");
         }
+
+    } catch (Exception e) {
+        System.out.println("Erro ao buscar Editora.");
+    }
     }
 
     private void incluirEditora() {

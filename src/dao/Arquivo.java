@@ -6,8 +6,9 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
-import model.Livro;
-import model.Usuario;
+//import model.Livro;
+//import model.Usuario;
+import model.*;
 
 public class Arquivo<T extends Registro> {
     private static final int TAM_CABECALHO = 12;
@@ -172,6 +173,78 @@ public class Arquivo<T extends Registro> {
         }
       
         return livro; 
+    }
+
+    public Autor buscarAutorPorNome(String nome) throws Exception {
+        Autor autor = null;
+        arquivo.seek(TAM_CABECALHO); 
+
+        while (arquivo.getFilePointer() < arquivo.length()) {
+            byte lapide = arquivo.readByte();
+            short tam = arquivo.readShort();
+            byte[] dados = new byte[tam];
+            arquivo.readFully(dados);
+
+            if (lapide == ' ') {
+                Autor au = new Autor();
+                au.fromByteArray(dados);
+
+                if (au.getNome().equals(nome)) {
+                    autor = au;
+                    break; 
+                }
+            }
+        }
+      
+        return autor; 
+    }
+
+    public Editora buscardEditoraNome(String nome) throws Exception {
+        Editora editora = null;
+        arquivo.seek(TAM_CABECALHO); 
+
+        while (arquivo.getFilePointer() < arquivo.length()) {
+            byte lapide = arquivo.readByte();
+            short tam = arquivo.readShort();
+            byte[] dados = new byte[tam];
+            arquivo.readFully(dados);
+
+            if (lapide == ' ') {
+                Editora ed = new Editora();
+                ed.fromByteArray(dados);
+
+                if (ed.getNome().equals(nome)) {
+                    editora = ed;
+                    break; 
+                }
+            }
+        }
+      
+        return editora; 
+    }
+
+    public Usuario buscarUsuarioNick(String nick) throws Exception {
+        Usuario usuario = null;
+        arquivo.seek(TAM_CABECALHO); 
+
+        while (arquivo.getFilePointer() < arquivo.length()) {
+            byte lapide = arquivo.readByte();
+            short tam = arquivo.readShort();
+            byte[] dados = new byte[tam];
+            arquivo.readFully(dados);
+
+            if (lapide == ' ') {
+                Usuario u = new Usuario();
+                u.fromByteArray(dados);
+
+                if (u.getNick().equals(nick)) {
+                    usuario = u;
+                    break; 
+                }
+            }
+        }
+      
+        return usuario; 
     }
 
     public T readByEndereco(long end) throws Exception {
