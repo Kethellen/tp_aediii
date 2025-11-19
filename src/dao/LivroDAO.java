@@ -42,6 +42,10 @@ public class LivroDAO {
         return livros;
     }
 
+    public Livro buscarLivroPorTitulo(String titulo) throws Exception {
+        return arqLivro.buscarLivroTitulo(titulo);
+    }
+
     public boolean incluirLivro(Livro livro) throws Exception {
         long end = arqLivro.createEndereco(livro);
         if(end < 0) { return false; }

@@ -73,20 +73,46 @@ public class LivroController {
     }
 
     private void buscarLivro() {
-        System.out.print("\nID do Livro: ");
-        int id = console.nextInt();
-        console.nextLine();
+        System.out.println("\nCriterio da busca: \n");
+        System.out.println("1 - ID");
+        System.out.println("2 - Titulo\n");
+
         try {
+
+        int op = console.nextInt();
+
+        if(op==1){
+            System.out.print("\nID do Livro: ");
+            int id = console.nextInt();
+            console.nextLine();
+
             Livro Livro = LivroDAO.buscarLivro(id);
             if (Livro != null) {
                 System.out.println(Livro);
             } else {
-                System.out.println("Livro não encontrado.");
+                System.out.println("\nLivro não encontrado.");
             }
-        } catch (Exception e) {
-            System.out.println("Erro ao buscar livro.");
+
+        } else if(op==2){
+            System.out.println("\nTitulo do Livro: ");
+            console.nextLine();
+            String titulo = console.nextLine();
+
+                Livro Livro = LivroDAO.buscarLivroPorTitulo(titulo);
+                if (Livro != null) {
+                    System.out.println(Livro);
+                } else {
+                    System.out.println("\nLivro não encontrado.");
+                }
+        } else {
+                System.out.println("\nOpção inválida!");
         }
+
+    } catch (Exception e) {
+        System.out.println("Erro ao buscar Livro.");
     }
+    }
+    
 
     private void incluirLivro() {
         System.out.println("\nInclusão de livro");

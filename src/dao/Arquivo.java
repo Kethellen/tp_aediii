@@ -6,6 +6,7 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
+import model.Livro;
 import model.Usuario;
 
 public class Arquivo<T extends Registro> {
@@ -147,6 +148,30 @@ public class Arquivo<T extends Registro> {
         }
       
         return usuarioEncontrado; 
+    }
+
+    public Livro buscarLivroTitulo(String titulo) throws Exception {
+        Livro livro = null;
+        arquivo.seek(TAM_CABECALHO); 
+
+        while (arquivo.getFilePointer() < arquivo.length()) {
+            byte lapide = arquivo.readByte();
+            short tam = arquivo.readShort();
+            byte[] dados = new byte[tam];
+            arquivo.readFully(dados);
+
+            if (lapide == ' ') {
+                Livro l = new Livro();
+                l.fromByteArray(dados);
+
+                if (l.getTitulo().equals(titulo)) {
+                    livro = l;
+                    break; 
+                }
+            }
+        }
+      
+        return livro; 
     }
 
     public T readByEndereco(long end) throws Exception {
