@@ -9,7 +9,7 @@ public class Favorito implements Registro {
     private int idUser;
     private String isbn;
     private String nome;
-    private String modo;
+    //private String modo;
 
     public Favorito(){
         this(-1, -1, null, null);

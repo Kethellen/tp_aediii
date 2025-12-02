@@ -2,7 +2,6 @@ package controller;
 
 import dao.EditoraDAO;
 import model.Editora;
-import model.Editora;
 import java.util.Scanner;
 
 public class EditoraController {
@@ -45,6 +44,35 @@ public class EditoraController {
                     break;
                 case 4:
                     excluirEditora();
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }
+        } while (opcao != 0);
+    }
+
+    public void menuUsuario() {
+        int opcao;
+        do {
+            System.out.println("\n\nAEDsIII");
+            System.out.println("-------");
+            System.out.println("> Início > Editoras");
+            System.out.println("\n1 - Buscar");
+            System.out.println("0 - Voltar");
+
+            System.out.print("\nOpção: ");
+            try {
+                opcao = Integer.valueOf(console.nextLine());
+            } catch(NumberFormatException e) {
+                opcao = -1;
+            }
+
+            switch (opcao) {
+                case 1:
+                    buscarEditora();
                     break;
                 case 0:
                     break;

@@ -72,6 +72,38 @@ public class LivroController {
         } while (opcao != 0);
     }
 
+    public void menuUsuario() {
+        int opcao;
+        do {
+            System.out.println("\n\nAEDsIII");
+            System.out.println("-------");
+            System.out.println("> Início > Livros");
+            System.out.println("\n1 - Buscar");
+            System.out.println("2 - Listar Autores do Livro");
+            System.out.println("0 - Voltar");
+
+            System.out.print("\nOpção: ");
+            try {
+                opcao = Integer.valueOf(console.nextLine());
+            } catch(NumberFormatException e) {
+                opcao = -1;
+            }
+
+            switch (opcao) {
+                case 1:
+                    buscarLivro();
+                    break;
+                case 2:
+                    listarAutoresDoLivro();
+                case 0:
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }
+        } while (opcao != 0);
+    }
+
     private void buscarLivro() {
         System.out.println("\nCriterio da busca: \n");
         System.out.println("1 - ID");

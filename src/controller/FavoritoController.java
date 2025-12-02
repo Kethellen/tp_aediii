@@ -26,7 +26,7 @@ public class FavoritoController {
         do {
             System.out.println("\n\nAEDsIII");
             System.out.println("-------");
-            System.out.println("> Início > Editoras");
+            System.out.println("> Início > Favoritos");
             System.out.println("\n1 - Mostrar meus favotitos");
             System.out.println("2 - Incluir");
             System.out.println("3 - Alterar");
@@ -55,6 +55,47 @@ public class FavoritoController {
                     excluirFavorito();
                     break;
                 case 5:
+                    catalogoDeLivros();
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }
+        } while (opcao != 0);
+    }
+
+    public void menuUsuario() throws Exception{
+        int opcao;
+        do {
+            System.out.println("\n\nAEDsIII");
+            System.out.println("-------");
+            System.out.println("> Início > Favoritos");
+            System.out.println("\n1 - Mostrar meus favotitos");
+            System.out.println("2 - Incluir");
+            System.out.println("3 - Excluir");
+            System.out.println("4 - Catalogo de Livros");
+            System.out.println("0 - Voltar");
+
+            System.out.print("\nOpção: ");
+            try {
+                opcao = Integer.valueOf(console.nextLine());
+            } catch(NumberFormatException e) {
+                opcao = -1;
+            }
+
+            switch (opcao) {
+                case 1:
+                    buscarFavorito();
+                    break;
+                case 2:
+                    incluirFavorito();
+                    break;
+                case 3:
+                    excluirFavorito();
+                    break;
+                case 4:
                     catalogoDeLivros();
                     break;
                 case 0:

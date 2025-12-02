@@ -2,7 +2,7 @@ package controller;
 
 import dao.AutorDAO;
 import dao.LivroAutorDAO;
-import dao.LivroDAO;
+//import dao.LivroDAO;
 import model.Autor;
 import model.Livro;
 
@@ -60,6 +60,39 @@ public class AutorController {
                     associarAutorLivro();
                     break;
                 case 6:
+                    listarLivrosDoAutor();
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }
+        } while (opcao != 0);
+    }
+
+    public void menuUsuario() {
+        int opcao;
+        do {
+            System.out.println("\n\nAEDsIII");
+            System.out.println("-------");
+            System.out.println("> Início > Autores");
+            System.out.println("\n1 - Buscar");
+            System.out.println("2 - Listar Livros do Autor");
+            System.out.println("0 - Voltar");
+
+            System.out.print("\nOpção: ");
+            try {
+                opcao = Integer.valueOf(console.nextLine());
+            } catch(NumberFormatException e) {
+                opcao = -1;
+            }
+
+            switch (opcao) {
+                case 1:
+                    buscarAutor();
+                    break;
+                case 2:
                     listarLivrosDoAutor();
                     break;
                 case 0:
